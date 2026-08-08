@@ -11,10 +11,14 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/products")
-@RequiredArgsConstructor
 public class ProductController {
-    @Autowired
+
     private final IProductService iProductService;
+
+    public ProductController(IProductService iProductService) {
+        this.iProductService = iProductService;
+    }
+
     @GetMapping
     public List<ProductDto> getProducts() {
         List<ProductDto> productList=iProductService.getProducts();

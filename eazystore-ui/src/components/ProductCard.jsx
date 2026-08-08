@@ -1,12 +1,13 @@
 import React from "react";
 import Price from "./Price";
+import resolveImageUrl from "../utils/imageResolver";
 
 export default function ProductCard({ product }) {
   return (
     <div className="w-72 rounded-md mx-auto border border-gray-300 shadow-md overflow-hidden flex flex-col bg-white hover:shadow-lg transition">
       <div className="relative w-full h-72 border-b border-gray-300">
         <img
-          src={product.imageUrl}
+          src={resolveImageUrl(product.imageUrl)}
           alt={product.name}
           className="w-full h-full object-cover transition-transform duration-500 ease-in-out hover:scale-110"
         />
