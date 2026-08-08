@@ -9,5 +9,4 @@ public class EazyStickersApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(EazyStickersApplication.class, args);
 	}
-
 }
