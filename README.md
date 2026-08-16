@@ -1,4 +1,4 @@
-# 🛒 EasyStore
+# 🛒 EazyStickers
 
 **EasyStore** is a full-stack e-commerce web application built with **Spring Boot, React, and MySQL**. The project provides a modern shopping experience with a React-based frontend and a Java Spring Boot REST API backend.
 
