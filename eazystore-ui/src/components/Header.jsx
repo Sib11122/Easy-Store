@@ -6,12 +6,15 @@ import {
   faMoon,
 } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect } from "react";
+import { Link, NavLink } from "react-router-dom";
 
 export default function Header() {
+  // Get saved theme from localStorage
   const [theme, setTheme] = useState(() => {
     return localStorage.getItem("theme") === "dark" ? "dark" : "light";
   });
 
+  // Apply theme to HTML element
   useEffect(() => {
     if (theme === "dark") {
       document.documentElement.classList.add("dark");
@@ -20,24 +23,37 @@ export default function Header() {
     }
   }, [theme]);
 
+  // Toggle between light and dark mode
   const toggleTheme = () => {
     setTheme((prevTheme) => {
       const newTheme = prevTheme === "light" ? "dark" : "light";
+
       localStorage.setItem("theme", newTheme);
+
       return newTheme;
     });
   };
 
+  // Common styling for navigation links
   const navLinkClass =
     "text-center text-lg font-primary font-semibold text-primary py-2 dark:text-light hover:text-dark dark:hover:text-lighter";
+
   return (
     <header className="border-b border-gray-300 dark:border-gray-600 sticky top-0 z-20 bg-normalbg dark:bg-darkbg">
       <div className="flex items-center justify-between mx-auto max-w-[1152px] px-6 py-4">
-        <a href="/" className={navLinkClass}>
+
+        {/* Logo */}
+        <Link to="/" className={navLinkClass}>
           <FontAwesomeIcon icon={faTags} className="h-8 w-8" />
-          <span className="font-bold">Eazy Stickers</span>
-        </a>
+          <span className="font-bold ml-2">
+            Eazy Stickers
+          </span>
+        </Link>
+
+        {/* Navigation */}
         <nav className="flex items-center py-2 z-10">
+
+          {/* Theme Toggle */}
           <button
             className="flex items-center justify-center mx-3 w-8 h-8 rounded-full border border-primary dark:border-light transition duration-300 hover:bg-gray-300 dark:hover:bg-gray-600"
             aria-label="Toggle theme"
@@ -48,40 +64,73 @@ export default function Header() {
               className="w-4 h-4 dark:text-light text-primary"
             />
           </button>
+
+          {/* Navigation Links */}
           <ul className="flex space-x-6">
+
+            {/* Home */}
             <li>
-              <a href="/" className={navLinkClass}>
+              <NavLink
+                to="/home"
+                className={({ isActive }) =>
+                  `${navLinkClass} ${isActive ? "underline" : ""}`
+                }
+              >
                 Home
-              </a>
+              </NavLink>
             </li>
+
+            {/* About */}
             <li>
-              <a href="/about" className={navLinkClass}>
+              <NavLink
+                to="/about"
+                className={({ isActive }) =>
+                  `${navLinkClass} ${isActive ? "underline" : ""}`
+                }
+              >
                 About
-              </a>
+              </NavLink>
             </li>
+
+            {/* Contact */}
             <li>
-              <a href="/contact" className={navLinkClass}>
+              <NavLink
+                to="/contact"
+                className={({ isActive }) =>
+                  `${navLinkClass} ${isActive ? "underline" : ""}`
+                }
+              >
                 Contact
-              </a>
+              </NavLink>
             </li>
+
+            {/* Login */}
             <li>
-              <a href="/login" className={navLinkClass}>
+              <NavLink
+                to="/login"
+                className={({ isActive }) =>
+                  `${navLinkClass} ${isActive ? "underline" : ""}`
+                }
+              >
                 Login
-              </a>
+              </NavLink>
             </li>
+
+            {/* Cart */}
             <li>
-              <a href="/cart" className="text-primary py-2">
+              <Link
+                to="/cart"
+                className="text-primary py-2 dark:text-light"
+              >
                 <FontAwesomeIcon
                   icon={faShoppingBasket}
-                  className="dark:text-light"
                 />
-              </a>
+              </Link>
             </li>
+
           </ul>
         </nav>
       </div>
     </header>
   );
 }
-
-// export default Header;
